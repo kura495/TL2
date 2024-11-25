@@ -6,16 +6,20 @@ void TextureConverter::ConvertTextureWICToDDS(const std::string& filePath)
 
 }
 
+void TextureConverter::SeparateFilePath(const std::wstring& filePath)
+{
+}
+
 std::wstring TextureConverter::ConvertMultiByteStringToWideString(const std::string& mString)
 {
-	//ƒƒCƒh•¶š—ñ‚É•ÏŠ·‚µ‚½Û‚Ì•¶š—ñ‚ğŒvZ
+	//ãƒ¯ã‚¤ãƒ‰æ–‡å­—åˆ—ã«å¤‰æ›ã—ãŸéš›ã®æ–‡å­—åˆ—ã‚’è¨ˆç®—
 	int filePathBufferSize = MultiByteToWideChar(CP_ACP,0,mString.c_str(), -1,nullptr,0);
 
-	//ƒƒCƒh•¶š—ñ
+	//ãƒ¯ã‚¤ãƒ‰æ–‡å­—åˆ—
 	std::wstring wString;
 	wString.resize(filePathBufferSize);
 
-	//ƒƒCƒh•¶š—ñ‚É•ÏŠ·
+	//ãƒ¯ã‚¤ãƒ‰æ–‡å­—åˆ—ã«å¤‰æ›
 	MultiByteToWideChar(CP_ACP,0,mString.c_str(),-1,&wString[0],filePathBufferSize);
 
 	return wString;
@@ -23,7 +27,9 @@ std::wstring TextureConverter::ConvertMultiByteStringToWideString(const std::str
 
 void TextureConverter::LoadWICTextureFromFile(const std::string& filePath)
 {
-	//ƒtƒ@ƒCƒ‹ƒpƒX‚ğƒƒCƒh•¶š—ñ‚É•ÏŠ·‚·‚é
+	//ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’ãƒ¯ã‚¤ãƒ‰æ–‡å­—åˆ—ã«å¤‰æ›ã™ã‚‹
 	std::wstring wfilePath = ConvertMultiByteStringToWideString(filePath.c_str());
 
+	HRESULT result = LoadFromWICFile(wfilePath.c_str(),DirectX::WIC_FLAGS_NONE,&metadata_,scratchImage_);
+	assert(SUCCEEDED(result));
 }
