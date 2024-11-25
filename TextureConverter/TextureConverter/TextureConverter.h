@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-
+#include <Windows.h>
 //テクスチャコンバーター
 class TextureConverter
 {
@@ -16,4 +16,5 @@ private:
 	/// </summary>
 	static std::wstring ConvertMultiByteStringToWideString(const std::string& mString);
 
+	void LoadWICTextureFromFile(const std::string& filePath);
 };

@@ -6,5 +6,10 @@ void TextureConverter::ConvertTextureWICToDDS(const std::string& filePath)
 
 std::wstring TextureConverter::ConvertMultiByteStringToWideString(const std::string& mString)
 {
+	int filePathBufferSize = MultiByteToWideChar(CP_ACP,0,mString.c_str(), -1,nullptr,0);
 	return std::wstring();
+}
+
+void TextureConverter::LoadWICTextureFromFile(const std::string& filePath)
+{
 }
