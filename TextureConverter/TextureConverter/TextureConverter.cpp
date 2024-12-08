@@ -5,6 +5,26 @@ void TextureConverter::ConvertTextureWICToDDS(const std::string& filePath)
 	LoadWICTextureFromFile(filePath);
 }
 
+void TextureConverter::SeparateFilePath(const std::wstring& filePath)
+{
+	size_t pos1;
+	std::wstring exceptExt;
+
+	//区切り文字'.'が出てくる一番最後の部分を検索
+	pos1 = filePath.find('.');
+	//検索がヒットしたら
+	if (pos1 != std::wstring::npos) {
+		//区切り文字の後ろをファイル拡張子としてオゾン
+		fileExt_ = filePath.substr(pos1 + 1, filePath.size() - pos1 - 1);
+		//区切り文字の前までを抜き出す
+		exceptExt = filePath.substr(0,pos1);
+	}
+	else {
+		fileExt_ = L"";
+		exceptExt = filePath;
+	}
+}
+
 void TextureConverter::LoadWICTextureFromFile(const std::string& filePath)
 {
 	// ファイルパスをワイド文字列に変換する
