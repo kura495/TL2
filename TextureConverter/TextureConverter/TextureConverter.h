@@ -13,6 +13,10 @@ public:
 
 private:
 	/// <summary>
+	/// DDSテクスチャとしてファイル書き出し
+	/// </summary>
+	void SaveDDSTextureToFile();
+	/// <summary>
 	/// フォルダパスとファイル名を割する
 	/// </summary>
 	/// <param name="filePath">ファイルパス</param>
