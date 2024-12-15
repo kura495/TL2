@@ -7,7 +7,7 @@
 
 enum Argument {
 	kApplicationPath,	//アプリケーションのパス
-	kFilePath,			//消されたファイルのパス
+	kFilePath,			//ファイルのパス
 
 	NumArgument
 };
@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
 	if (argc < NumArgument) {
 		//使い方を表示する
 		TextureConverter::OutputUsage();
-		return 0;
+		//return 0;
 	}
 
 	//COMライブラリの初期化
