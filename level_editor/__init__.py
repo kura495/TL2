@@ -19,28 +19,14 @@ from .stretch_vertex import MYADDON_OT_stretch_vertex
 from .create_ico_sphere import MYADDON_OT_create_ico_sphere
 from .export_scene import MYADDON_OT_export_scene
 from .add_filename import MYADDON_OT_add_filename
+from .add_filename import OBJECT_PT_file_name
 from .add_collider import MYADDON_OT_add_collider
 from .collider import OBJECT_PT_collider
 from .draw_collider import DrawCollider
-
-#パネル　ファイル名
-class OBJECT_PT_file_name(bpy.types.Panel):
-    bl_idname = "OBJECT_PT_file_name"
-    bl_label = "FileName"
-    bl_space_type = "PROPERTIES"
-    bl_region_type = "WINDOW"
-    bl_context = "object"
-
-    #サブメニューの描画
-    def draw(self, context):
-        #パネルに項目を追加
-        if "file_name" in context.object:
-            #既にプロパティがあれば、プロパティを表示
-            self.layout.prop(context.object, '["file_name"]', text=self.bl_label)
-        else:
-            #プロパティが無ければ、プロパティ追加ボタンを表示
-            self.layout.operator(MYADDON_OT_add_filename.bl_idname)
-
+from .disabled import MYADDON_OT_disabled
+from .disabled import OBJECT_PT_disabled
+from .spawn import spawn_import_symbol
+from .spawn import MYADDON_OT_spawn_import_symbol
 
 # トップバーの拡張メニュー
 class TOPBAR_MT_my_menu(bpy.types.Menu):
@@ -59,7 +45,7 @@ class TOPBAR_MT_my_menu(bpy.types.Menu):
         self.layout.operator(MYADDON_OT_stretch_vertex.bl_idname, text = MYADDON_OT_stretch_vertex.bl_label)
         self.layout.operator(MYADDON_OT_create_ico_sphere.bl_idname, text = MYADDON_OT_create_ico_sphere.bl_label)
         self.layout.operator(MYADDON_OT_export_scene.bl_idname,text = MYADDON_OT_export_scene.bl_label)
-
+        self.layout.operator(spawn_import_symbol.bl_idname,text = spawn_import_symbol.bl_label)
 
     # 既存のメニューにサブメニューを追加
     def submenu(self, context):
@@ -76,8 +62,11 @@ classes = (
     OBJECT_PT_file_name,
     MYADDON_OT_add_collider,
     OBJECT_PT_collider,
+    MYADDON_OT_disabled,
+    OBJECT_PT_disabled,
+    spawn_import_symbol,
+    MYADDON_OT_spawn_import_symbol,
 )
-
 
 # アドオン有効化時コールバック
 def register():

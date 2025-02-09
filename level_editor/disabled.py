@@ -29,5 +29,3 @@ class OBJECT_PT_disabled(bpy.types.Panel):
         else:
             #プロパティが無ければ、プロパティ追加ボタンを表示
             self.layout.operator(MYADDON_OT_disabled.bl_idname)
-        
-        return {"FINISHED"}
